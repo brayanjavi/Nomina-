@@ -18,19 +18,21 @@ const Login = () => {
     return (
         <View>
             <Text>Login</Text>
-            <Text>Email</Text>
+            <Text style={styles.Text}>Email</Text>
             <TextInput
                 placeholder="Email"
                 onChangeText={(dato) => { setEmail(dato) }}
                 value={email}
+                style={styles.input}
             />
-            <Text>Password</Text>
+            <Text style={styles.Text}>Password</Text>
             <TextInput
                 placeholder="Password"
                 onChangeText={(dato) => { setPassword(dato) }}
                 value={password}
+                style={styles.input}
             />
-           <TouchableOpacity onPress={handleLogin}>
+           <TouchableOpacity onPress={handleLogin} style={styles.button}>
                 <Text>Login</Text>
             </TouchableOpacity>        
    
@@ -53,6 +55,14 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       padding: 10,
     },
+    input:{
+        borderWidth: 1,
+        color: 'black',
+        backgroundColor: 'white',
+    },
+    Text:{
+        color: '#ffffff',
+    }   
   });
   
 export default Login;

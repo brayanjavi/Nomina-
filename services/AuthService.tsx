@@ -8,6 +8,7 @@ export const LoginService = async (email: string, password: string) => {
      const config = {
          method: 'post',
          url: 'http://198.251.72.253:8080/boletaje/api/auth/signin',
+         //url:'http://198.251.72.253:8080/nomina/api/auth/signin',
          headers: {
              'Content-Type': 'application/json'
          },
