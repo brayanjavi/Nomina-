@@ -1,68 +1,80 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, TouchableOpacity,StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { LoginService } from "@/services/AuthService";
 
-
-const Login = () => {
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const Login: React.FC = () => {
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
     const handleLogin = async () => {
-        LoginService(email, password).then((data) => {
+        try {
+            const data = await LoginService(email, password);
             console.log("datos Login", data);
-        }).catch((error) => {
+        } catch (error) {
             console.log("error", error);
-        });
+        }
     };
+
     return (
-        <View>
-            <Text>Login</Text>
-            <Text style={styles.Text}>Email</Text>
+        <View style={styles.container}>
+            <Text style={styles.title}>Login</Text>
+            <Text style={styles.label}>Email</Text>
             <TextInput
                 placeholder="Email"
-                onChangeText={(dato) => { setEmail(dato) }}
+                onChangeText={setEmail}
                 value={email}
                 style={styles.input}
+                keyboardType="email-address"
+                autoCapitalize="none"
             />
-            <Text style={styles.Text}>Password</Text>
+            <Text style={styles.label}>Password</Text>
             <TextInput
                 placeholder="Password"
-                onChangeText={(dato) => { setPassword(dato) }}
+                onChangeText={setPassword}
                 value={password}
                 style={styles.input}
+                secureTextEntry
             />
-           <TouchableOpacity onPress={handleLogin} style={styles.button}>
-                <Text>Login</Text>
-            </TouchableOpacity>        
-   
+            <TouchableOpacity onPress={handleLogin} style={styles.button}>
+                <Text style={styles.buttonText}>Login</Text>
+            </TouchableOpacity>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      justifyContent: 'center',
-      paddingHorizontal: 10,
+        flex: 1,
+        justifyContent: 'center',
+        padding: 16,
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 16,
+        textAlign: 'center',
+    },
+    label: {
+        fontSize: 16,
+        marginBottom: 8,
+    },
+    input: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        marginBottom: 16,
+        paddingHorizontal: 8,
     },
     button: {
-      alignItems: 'center',
-      backgroundColor: '#DDDDDD',
-      padding: 10,
+        backgroundColor: '#007BFF',
+        padding: 10,
+        alignItems: 'center',
+        borderRadius: 5,
     },
-    countContainer: {
-      alignItems: 'center',
-      padding: 10,
+    buttonText: {
+        color: '#FFFFFF',
+        fontSize: 16,
     },
-    input:{
-        borderWidth: 1,
-        color: 'black',
-        backgroundColor: 'white',
-    },
-    Text:{
-        color: '#ffffff',
-    }   
-  });
-  
+});
+
 export default Login;

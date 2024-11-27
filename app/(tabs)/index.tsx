@@ -19,7 +19,7 @@ export default function HomeScreen() {
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
       </ThemedView>
-      <View>
+      <View style={{ backgroundColor: "white" }}>
         <Login />
       </View>
     </ParallaxScrollView>
